@@ -28,15 +28,14 @@ async def ask(req: AskRequest):
                 "X-Tealium-Api-Key": api_key,
                 "Content-Type": "application/json"
             },
-            json={
-                "visitor_id": req.visitor_id
-            },
+            json={"visitor_id": req.visitor_id},
             timeout=10
         )
 
         return {
             "status": "success",
-            "tealium_response": response.json()
+            "status_code": response.status_code,
+            "tealium_response": response.text
         }
 
     except Exception as e:
